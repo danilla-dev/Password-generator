@@ -15,19 +15,19 @@
         <legend class="legend password-length-legend">Password length:</legend>
         <label for="length">Length: </label>
         <span class="length-value-preview" id="length-prev">12</span>
-        <input name="length" id="length" type="range" min="8" max="30" />
+        <input name="length" id="length" type="range" min="8" max="30" class="length-input" />
       </fieldset>
       <fieldset class="fieldset characters-fieldset">
         <legend class="legend include-cahracters-legend">Characters include:</legend>
         <div class="checkboxes-container">
-          <label for="length">ABC:
-            <input name="length" type="checkbox" id="include-uppercase" checked /></label>
-          <label for="length">abc:
-            <input name="length" type="checkbox" id="include-lowercase" checked /></label>
-          <label for="length">123:<input name="length" type="checkbox" id="include-numbers" />
+          <label for="uppercase">ABC:
+            <input name="uppercase" type="checkbox" id="include-uppercase" class="checkbox-input" checked /></label>
+          <label for="lowercase">abc:
+            <input name="lowercase" type="checkbox" id="include-lowercase" class="checkbox-input" checked /></label>
+          <label for="numbers">123:<input name="numbers" type="checkbox" id="include-numbers" class="checkbox-input" />
           </label>
-          <label for="length">!@./:
-            <input name="length" type="checkbox" id="include-specials" />
+          <label for="specials">!@./:
+            <input name="specials" type="checkbox" id="include-specials" class=".checkbox-input" />
           </label>
         </div>
       </fieldset>
