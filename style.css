@@ -4,5 +4,15 @@
 	box-sizing: border-box;
 }
 html {
-	font-size: 62.5px;
+	font-size: 62.5%;
+}
+body {
+	font-family: 'Arial', sans-serif;
+	font-size: 1.6rem;
+}
+.container {
+	width: 100%;
+	max-width: 120rem;
+	margin: 0 auto;
+	padding: 0 2rem;
 }

@@ -9,7 +9,32 @@
 </head>
 
 <body>
-
+  <div id="app">
+    <form>
+      <fieldset class="fieldset length-fieldset">
+        <legend class="legend password-length-legend">Password length:</legend>
+        <label for="length">Length: </label>
+        <span class="length-value-preview" id="length-prev">12</span>
+        <input name="length" id="length" type="range" min="8" max="30" />
+      </fieldset>
+      <fieldset class="fieldset characters-fieldset">
+        <legend class="legend include-cahracters-legend">Characters include:</legend>
+        <div class="checkboxes-container">
+          <label for="length">ABC:
+            <input name="length" type="checkbox" id="include-uppercase" checked /></label>
+          <label for="length">abc:
+            <input name="length" type="checkbox" id="include-lowercase" checked /></label>
+          <label for="length">123:<input name="length" type="checkbox" id="include-numbers" />
+          </label>
+          <label for="length">!@./:
+            <input name="length" type="checkbox" id="include-specials" />
+          </label>
+        </div>
+      </fieldset>
+      <button id="generate-btn">Generate</button>
+      <span id="result"></span>
+    </form>
+  </div>
   <script src="/main.js"></script>
 </body>
 
