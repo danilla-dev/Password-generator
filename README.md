@@ -2,6 +2,10 @@
 
 A customizable password generator built with JavaScript to create secure, personalized passwords based on user-selected options. The project includes unit tests using Jest for robust functionality and verification.
 
+## Live demo 🌐
+
+Check a deployment application [live](https://passwordgenerator.petroweb.pl)
+
 ## Features ✨
 
 - **Password Length Control**: Customize the length of the generated password.
