@@ -110,17 +110,24 @@ input{
 	background-color: var(--control-hover);
 }
 
+.checkboxes-container{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.checkboxes-container input {
+	font-size: 2rem;
+}
 .checkboxes-container label {
-	color: var(--secondary-text);
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	gap: 0.8em;
 	margin-bottom: 0.5em;
+	margin-right: 0.25em;
+	width: 45%;
+	color: var(--secondary-text);
 	cursor: pointer;
-}
-
-.checkbox-input {
-	margin-right: 1em;
 }
 
 button {
@@ -179,6 +186,8 @@ button:hover {
 	gap: 1em;
 	bottom: 2em;
 	left: 50%;
+	width: 80%;
+	max-width: 300px;
 	transform: translateX(-50%);
 	z-index: 1000;
 }

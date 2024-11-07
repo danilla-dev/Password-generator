@@ -7,6 +7,7 @@ const result = document.getElementById("result")
 // inital password length value
 lengthInput.value = 12;
 
+let passwordStrength = 0
 
 const charactersObject = {
   lowercase: "abcdefghijklmnopqrstuvwxyz",
@@ -14,6 +15,28 @@ const charactersObject = {
   numbers: "0123456789",
   special: "!@#$%^&*()_+[]{}|;:,.<>?"
 }
+
+const checkPasswordStrength = (password) => {
+  const { lowercase, uppercase, numbers, special} = charactersObject
+
+  let strength = 1
+
+  console.log(password)
+  if (password.length > 8 ) strength += 1
+  if (password.length > 10 ) strength += 1
+  if (password.length > 15 ) strength += 1
+  if (password.length > 20 ) strength += 1
+  if (password.length > 25 ) strength += 1
+
+  if (lowercase.split('').some(char => password.includes(char))) strength += 1;
+  if (uppercase.split('').some(char => password.includes(char))) strength += 1;
+  if (numbers.split('').some(char => password.includes(char))) strength += 1;
+  if (special.split('').some(char => password.includes(char))) strength += 1;
+
+  console.log(strength)
+  return strength
+}
+
 
 // Show toast function 
 const showToast = (message, duration = 3000) =>  {
@@ -46,6 +69,9 @@ copyBtn.addEventListener("click", (e) => {
   });
 });
 
+
+
+
 // generate password function
 generate.addEventListener("click", (e) => {
   e.preventDefault();
@@ -72,6 +98,7 @@ generate.addEventListener("click", (e) => {
 
     password += randomChar;
   }
+  checkPasswordStrength(password)
   result.innerText = password;
 });
 
