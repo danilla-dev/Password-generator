@@ -3,6 +3,7 @@ const lengthInput = document.getElementById("length");
 const lengthPrev = document.getElementById("length-prev");
 const copyBtn = document.getElementById("result-copy-btn")
 const result = document.getElementById("result")
+const strengthBar = document.getElementById("password-strength-bar")
 
 // inital password length value
 lengthInput.value = 12;
@@ -14,6 +15,29 @@ const charactersObject = {
   uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   numbers: "0123456789",
   special: "!@#$%^&*()_+[]{}|;:,.<>?"
+}
+
+
+
+const setStrengthBar = (strength) => {
+
+  strengthBar.className = ''
+ switch (strength){
+  case 'low': 
+  strengthBar.classList.add("low")
+  break
+  case 'mid': 
+  strengthBar.classList.add("mid")
+
+  break
+  case 'high': 
+  strengthBar.classList.add("high")
+
+  break
+  case 'perfect': 
+  strengthBar.classList.add("perfect")
+  break
+ }
 }
 
 const checkPasswordStrength = (password) => {
@@ -33,7 +57,18 @@ const checkPasswordStrength = (password) => {
   if (numbers.split('').some(char => password.includes(char))) strength += 1;
   if (special.split('').some(char => password.includes(char))) strength += 1;
 
+  if (strength <= 4) {
+    strength = 'low';
+  } else if (strength <= 6) {
+    strength = 'mid'
+  } else if (strength <= 9) {
+    strength = 'high'
+  } else {
+     strength = 'perfect'
+  }
+
   console.log(strength)
+  setStrengthBar(strength)
   return strength
 }
 

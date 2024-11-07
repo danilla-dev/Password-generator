@@ -28,6 +28,17 @@
 	/* Error Colors */
 	--error-bg: #ffebee;
 	--error-text: #c62828;
+
+		/* Password Strength Colors */
+		--low-strength-bg: #ffebee; /* Low strength color */
+		--mid-strength-bg: #fff3e0; /* Mid strength color */
+		--high-strength-bg: #e1f5fe; /* High strength color */
+		--perfect-strength-bg: #e8f5e9; /* Perfect strength color */
+	
+		--low-strength-text: #c62828; /* Text color for low strength */
+		--mid-strength-text: #ff9800; /* Text color for mid strength */
+		--high-strength-text: #1976d2; /* Text color for high strength */
+		--perfect-strength-text: #388e3c; /* Text color for perfect strength */
 }
 
 html {
@@ -150,7 +161,6 @@ button:hover {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 2em;
 	background-color: var(--result-bg);
 	color: var(--result-text);
 	padding: 0.5em;
@@ -207,4 +217,30 @@ button:hover {
 .toast.show {
 	opacity: 1;
 	transform: translateY(0);
+}
+.password-strength-bar-container {
+	width: 100%;
+	height: 20px;
+	margin: 1.5em 0;
+	border-radius: 5px;
+	border: 1px solid var(--secondary-text);
+}
+#password-strength-bar{
+	height: 100%;
+}
+.low{
+	width: 25%;
+	background-color: var(--low-strength-text);
+}
+.mid{
+	width: 50%;
+	background-color: var(--mid-strength-text);
+}
+.high{
+	width: 75%;
+	background-color: var(--high-strength-text);
+}
+.perfect{
+	width: 100%;
+	background-color: var(--perfect-strength-text);
 }
