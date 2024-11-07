@@ -1,6 +1,8 @@
+console.log('main.js loaded')
 import { setStrengthBar, showToast } from './modules/ui.js'
 import { generatePassword } from './modules/passwordUtils.js'
 import { checkPasswordStrength } from './modules/passwordStrength.js'
+console.log(setStrengthBar, showToast, generatePassword, checkPasswordStrength)
 
 const generate = document.querySelector('#generate-btn')
 const lengthInput = document.querySelector('#length')
@@ -31,8 +33,6 @@ checkboxesContainer.addEventListener('change', e => {
 
 	if (e.target.matches('.checkbox-input')) {
 		const strength = checkPasswordStrength(undefined, checkboxes, length)
-		console.log('strength:', strength)
-		console.log('strengthBar:', strengthBar)
 		setStrengthBar(strengthBar, strength)
 	}
 	const checkboxesArray = Array.from(checkboxesContainer.querySelectorAll('.checkbox-input'))
