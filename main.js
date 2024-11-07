@@ -1,14 +1,21 @@
-const generate = document.getElementById("generate-btn");
-const lengthInput = document.getElementById("length");
-const lengthPrev = document.getElementById("length-prev");
-const copyBtn = document.getElementById("result-copy-btn")
-const result = document.getElementById("result")
-const strengthBar = document.getElementById("password-strength-bar")
+const generate = document.querySelector("#generate-btn");
+const lengthInput = document.querySelector("#length");
+const lengthPrev = document.querySelector("#length-prev");
+const copyBtn = document.querySelector("#result-copy-btn")
+const result = document.querySelector("#result")
+const strengthBar = document.querySelector("#password-strength-bar")
+const checkboxes = document.querySelectorAll('.checkbox-input')
+const checboxesContainer = document.querySelector(".checkboxes-container")
+
+
 
 // inital password length value
-lengthInput.value = 12;
+const setInitialValue = () => {
+  lengthInput.value = 12;
+  strengthBar.classList.add('low')
+}
 
-let passwordStrength = 0
+setInitialValue()
 
 const charactersObject = {
   lowercase: "abcdefghijklmnopqrstuvwxyz",
@@ -18,9 +25,7 @@ const charactersObject = {
 }
 
 
-
 const setStrengthBar = (strength) => {
-
   strengthBar.className = ''
  switch (strength){
   case 'low': 
@@ -40,22 +45,22 @@ const setStrengthBar = (strength) => {
  }
 }
 
-const checkPasswordStrength = (password) => {
-  const { lowercase, uppercase, numbers, special} = charactersObject
-
+const checkPasswordStrength = () => {
   let strength = 1
 
-  console.log(password)
-  if (password.length > 8 ) strength += 1
-  if (password.length > 10 ) strength += 1
-  if (password.length > 15 ) strength += 1
-  if (password.length > 20 ) strength += 1
-  if (password.length > 25 ) strength += 1
+  const lengthValue = parseInt(lengthInput.value)
 
-  if (lowercase.split('').some(char => password.includes(char))) strength += 1;
-  if (uppercase.split('').some(char => password.includes(char))) strength += 1;
-  if (numbers.split('').some(char => password.includes(char))) strength += 1;
-  if (special.split('').some(char => password.includes(char))) strength += 1;
+  if (lengthValue > 8 ) strength += 1
+  if (lengthValue > 10 ) strength += 1
+  if (lengthValue > 15 ) strength += 1
+  if (lengthValue > 20 ) strength += 1
+  if (lengthValue > 25 ) strength += 1
+
+  checkboxes.forEach(box => {
+    if (box.checked) {
+      strength += 1
+    }
+  })
 
   if (strength <= 4) {
     strength = 'low';
@@ -67,9 +72,7 @@ const checkPasswordStrength = (password) => {
      strength = 'perfect'
   }
 
-  console.log(strength)
   setStrengthBar(strength)
-  return strength
 }
 
 
@@ -90,7 +93,6 @@ const showToast = (message, duration = 3000) =>  {
     setTimeout(() => toast.remove(), 400); 
   }, duration);
 }
-
 
 
 // copy to clipboard function
@@ -133,14 +135,19 @@ generate.addEventListener("click", (e) => {
 
     password += randomChar;
   }
-  checkPasswordStrength(password)
+  checkPasswordStrength()
   result.innerText = password;
 });
 
-
+checboxesContainer.addEventListener("change",(e)=>{
+  if (e.target.matches('.checkbox-input')) {
+    checkPasswordStrength();
+  }
+})
 
 
 lengthInput.addEventListener("input", () => {
   const length = parseInt(document.getElementById("length").value);
   lengthPrev.innerText = length;
+  checkPasswordStrength()
 });
