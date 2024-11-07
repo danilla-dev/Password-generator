@@ -5,39 +5,33 @@
 }
 :root {
 	/* Primary Colors */
-	--primary-bg: #f0f4f8; /* Tło główne */
-	--primary-text: #333333; /* Główny kolor tekstu */
-	--accent-color: #1e88e5; /* Kolor przycisku i nagłówków */
-	--accent-hover: #1565c0; /* Kolor przycisku po najechaniu */
+	--primary-bg: #f0f4f8;
+	--primary-text: #333333;
+	--accent-color: #1e88e5;
+	--accent-hover: #1565c0;
 
 	/* Secondary Colors */
-	--secondary-bg: #ffffff; /* Tło formularza */
-	--secondary-border: #e0e0e0; /* Kolor obramowania formularza */
-	--secondary-text: #666666; /* Kolor pomocniczy tekstu (np. placeholdery) */
+	--secondary-bg: #ffffff;
+	--secondary-border: #e0e0e0;
+	--secondary-text: #666666;
 
 	/* Input & Control Colors */
-	--control-bg: #e3f2fd; /* Tło inputów (range i checkboxy) */
-	--control-border: #1e88e5; /* Obramowanie inputów */
-	--control-text: #333333; /* Tekst w inputach */
-	--control-hover: #64b5f6; /* Kolor suwaka przy hover */
+	--control-bg: #e3f2fd;
+	--control-border: #1e88e5;
+	--control-text: #333333;
+	--control-hover: #64b5f6;
 
 	/* Result Colors */
-	--result-bg: #f1f8e9; /* Tło dla pola z wynikiem */
-	--result-text: #33691e; /* Kolor tekstu wyniku */
+	--result-bg: #f1f8e9;
+	--result-text: #33691e;
 
 	/* Error Colors */
-	--error-bg: #ffebee; /* Tło dla błędów */
-	--error-text: #c62828; /* Kolor tekstu błędu */
-
-
+	--error-bg: #ffebee;
+	--error-text: #c62828;
 }
 
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+html {
+	font-size: 62.5%; /* 1rem = 10px */
 }
 
 body {
@@ -52,55 +46,60 @@ body {
 
 #app {
 	width: 100%;
-	max-width: 500px;
-	padding: 20px;
+	max-width: 50rem;
+	padding: 2em;
 }
 
 form {
 	background-color: var(--secondary-bg);
-	border: 1px solid var(--secondary-border);
-	padding: 20px;
+	border: 0.1rem solid var(--secondary-border);
+	padding: 2em;
 	border-radius: 10px;
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+}
+label {
+	color: var(--secondary-text);
+	font-size: 1.8rem;
+}
+input{
+	cursor: pointer;
 }
 
 .fieldset {
 	border: none;
-	margin-bottom: 20px;
+	margin-bottom: 2em;
 }
 
 .legend {
 	font-weight: bold;
 	color: var(--primary-text);
-	margin-bottom: 10px;
+	margin-bottom: 1em;
 	display: block;
+	font-size: 1.6rem;
 }
 
-.label {
-	color: var(--secondary-text);
-	font-size: 0.9em;
-}
 
 .length-value-preview {
 	font-weight: bold;
 	color: var(--primary-text);
-	margin-left: 10px;
+	margin-left: 1em;
+	font-size: 1.4rem;
 }
 
 .length-input {
 	width: 100%;
-	margin-top: 10px;
+	margin-top: 1em;
 	background-color: var(--control-bg);
-	border: 1px solid var(--control-border);
-	border-radius: 5px;
-	height: 8px;
+	border: 0.1rem solid var(--control-border);
+	border-radius: 10px;
+	height: 0.8rem;
 	appearance: none;
 	cursor: pointer;
 }
 
 .length-input::-webkit-slider-thumb {
-	width: 16px;
-	height: 16px;
+	width: 1.6rem;
+	height: 1.6rem;
 	background-color: var(--accent-color);
 	border-radius: 50%;
 	appearance: none;
@@ -115,23 +114,25 @@ form {
 	color: var(--secondary-text);
 	display: flex;
 	align-items: center;
-	gap: 8px;
-	margin-bottom: 5px;
+	gap: 0.8em;
+	margin-bottom: 0.5em;
+	cursor: pointer;
 }
 
 .checkbox-input {
-	margin-right: 10px;
+	margin-right: 1em;
 }
 
 button {
 	background-color: var(--accent-color);
 	color: #fff;
 	border: none;
-	padding: 10px 20px;
-	border-radius: 5px;
-	font-size: 1em;
+	padding: 0.75em 1.5em;
+	border-radius: 10px;
+	font-size: 1.6rem;
 	cursor: pointer;
 	width: 100%;
+	transition: background-color 0.3s;
 }
 
 button:hover {
@@ -142,32 +143,59 @@ button:hover {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 20px;
+	margin-top: 2em;
 	background-color: var(--result-bg);
 	color: var(--result-text);
-	padding: 15px;
-	border-radius: 5px;
+	padding: 0.5em;
+	border-radius: 10px;
 	text-align: center;
 	font-weight: bold;
-	font-size: 1.1em;
+	font-size: 1.8rem;
 }
 #result {
 	display: inline-block;
 	max-width: 70%;
 	word-break: break-all; 
-    white-space: normal; 
+	white-space: normal; 
 }
-#result-container .copy-icon{
-	width: 20px;
+#result-container .copy-icon {
+	width: 2rem;
 	aspect-ratio: 1 /1;
 	color: var(--control-bg);
 }
-#result-copy-btn{
+#result-copy-btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 20%;
-	max-width: 50px;
+	max-width: 5rem;
 	padding: 0.5em 0.25em;
 	text-align: center;
+}
+#toast-container {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	bottom: 2em;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1000;
+}
+  
+.toast {
+	opacity: 0;
+	padding: 1em 2em;
+	border-radius: 10px;
+	border: 0.1rem solid var(--result-text);
+	background-color: var(--result-bg);
+	color: var(--result-text);
+	font-size: 1.6rem;
+	transform: translateY(-2rem);
+	transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.toast.show {
+	opacity: 1;
+	transform: translateY(0);
 }

@@ -3,24 +3,55 @@ const lengthInput = document.getElementById("length");
 const lengthPrev = document.getElementById("length-prev");
 const copyBtn = document.getElementById("result-copy-btn")
 const result = document.getElementById("result")
+
+// inital password length value
 lengthInput.value = 12;
 
 
+const charactersObject = {
+  lowercase: "abcdefghijklmnopqrstuvwxyz",
+  uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  numbers: "0123456789",
+  special: "!@#$%^&*()_+[]{}|;:,.<>?"
+}
 
+// Show toast function 
+const showToast = (message, duration = 3000) =>  {
+
+  const toast = document.createElement("div");
+  toast.classList.add("toast");
+  toast.innerText = message;
+
+  setTimeout(() => toast.classList.add("show"), 100);
+
+  const container = document.getElementById("toast-container");
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 400); 
+  }, duration);
+}
+
+
+
+// copy to clipboard function
 copyBtn.addEventListener("click", (e) => {
   e.preventDefault()
   const passwordText = result.innerText 
   navigator.clipboard.writeText(passwordText).then(() => {
-    alert("Hasło skopiowane do schowka!");
+    showToast("The password has been copied!", 2000)
   }).catch(err => {
-    console.error("Błąd podczas kopiowania hasła: ", err);
+    console.error("Error copying password", err);
   });
 });
 
-
-
+// generate password function
 generate.addEventListener("click", (e) => {
   e.preventDefault();
+
+  const { lowercase, uppercase, numbers, special} = charactersObject
+
   const length = parseInt(lengthInput.value);
   const includeUppercase = document.getElementById("include-uppercase").checked;
   const includeLowercase = document.getElementById("include-lowercase").checked;
@@ -29,10 +60,10 @@ generate.addEventListener("click", (e) => {
 
   let characters = "";
 
-  if (includeLowercase) characters += "abcdefghijklmnopqrstuvwxyz";
-  if (includeUppercase) characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  if (includeNumbers) characters += "0123456789";
-  if (includeSymbols) characters += "!@#$%^&*()_+[]{}|;:,.<>?";
+  if (includeLowercase) characters += lowercase;
+  if (includeUppercase) characters += uppercase;
+  if (includeNumbers) characters += numbers;
+  if (includeSymbols) characters += special;
 
   let password = "";
   while (password.length < length) {
@@ -41,9 +72,11 @@ generate.addEventListener("click", (e) => {
 
     password += randomChar;
   }
-
   result.innerText = password;
 });
+
+
+
 
 lengthInput.addEventListener("input", () => {
   const length = parseInt(document.getElementById("length").value);
