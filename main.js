@@ -1,119 +1,83 @@
 const generate = document.querySelector("#generate-btn");
 const lengthInput = document.querySelector("#length");
 const lengthPrev = document.querySelector("#length-prev");
-const copyBtn = document.querySelector("#result-copy-btn")
-const result = document.querySelector("#result")
-const strengthBar = document.querySelector("#password-strength-bar")
-const checkboxes = document.querySelectorAll('.checkbox-input')
-const checboxesContainer = document.querySelector(".checkboxes-container")
-
-
-
-// inital password length value
-const setInitialValue = () => {
-  lengthInput.value = 12;
-  strengthBar.classList.add('low')
-}
-
-setInitialValue()
+const copyBtn = document.querySelector("#result-copy-btn");
+const result = document.querySelector("#result");
+const strengthBar = document.querySelector("#password-strength-bar");
+const checkboxes = document.querySelectorAll('.checkbox-input');
+const checkboxesContainer = document.querySelector(".checkboxes-container");
 
 const charactersObject = {
   lowercase: "abcdefghijklmnopqrstuvwxyz",
   uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   numbers: "0123456789",
   special: "!@#$%^&*()_+[]{}|;:,.<>?"
-}
+};
 
+const setInitialValue = () => {
+  lengthInput.value = 12;
+  lengthPrev.innerText = lengthInput.value;
+  strengthBar.classList.add('low');
+};
+
+setInitialValue();
 
 const setStrengthBar = (strength) => {
-  strengthBar.className = ''
- switch (strength){
-  case 'low': 
-  strengthBar.classList.add("low")
-  break
-  case 'mid': 
-  strengthBar.classList.add("mid")
-
-  break
-  case 'high': 
-  strengthBar.classList.add("high")
-
-  break
-  case 'perfect': 
-  strengthBar.classList.add("perfect")
-  break
- }
-}
+  strengthBar.classList.remove('low', 'mid', 'high', 'perfect'); 
+  strengthBar.classList.add(strength);
+};
 
 const checkPasswordStrength = () => {
-  let strength = 1
+  let strength = 1; 
 
-  const lengthValue = parseInt(lengthInput.value)
-
-  if (lengthValue > 8 ) strength += 1
-  if (lengthValue > 10 ) strength += 1
-  if (lengthValue > 15 ) strength += 1
-  if (lengthValue > 20 ) strength += 1
-  if (lengthValue > 25 ) strength += 1
+  const lengthValue = parseInt(lengthInput.value);
+  if (lengthValue > 8) strength++;
+  if (lengthValue > 10) strength++;
+  if (lengthValue > 15) strength++;
+  if (lengthValue > 20) strength++;
+  if (lengthValue > 25) strength++;
 
   checkboxes.forEach(box => {
-    if (box.checked) {
-      strength += 1
-    }
-  })
+    if (box.checked) strength++; 
+  });
 
   if (strength <= 4) {
-    strength = 'low';
+    setStrengthBar('low');
   } else if (strength <= 6) {
-    strength = 'mid'
+    setStrengthBar('mid');
   } else if (strength <= 9) {
-    strength = 'high'
+    setStrengthBar('high');
   } else {
-     strength = 'perfect'
+    setStrengthBar('perfect');
   }
+};
 
-  setStrengthBar(strength)
-}
-
-
-// Show toast function 
-const showToast = (message, duration = 3000) =>  {
-
+const showToast = (message, duration = 3000) => {
   const toast = document.createElement("div");
   toast.classList.add("toast");
   toast.innerText = message;
 
-  setTimeout(() => toast.classList.add("show"), 100);
-
   const container = document.getElementById("toast-container");
   container.appendChild(toast);
 
+  setTimeout(() => toast.classList.add("show"), 100);
   setTimeout(() => {
     toast.classList.remove("show");
-    setTimeout(() => toast.remove(), 400); 
+    setTimeout(() => toast.remove(), 400);
   }, duration);
-}
+};
 
-
-// copy to clipboard function
 copyBtn.addEventListener("click", (e) => {
-  e.preventDefault()
-  const passwordText = result.innerText 
-  navigator.clipboard.writeText(passwordText).then(() => {
-    showToast("The password has been copied!", 2000)
-  }).catch(err => {
-    console.error("Error copying password", err);
-  });
+  e.preventDefault();
+  navigator.clipboard.writeText(result.innerText)
+    .then(() => showToast("The password has been copied!", 2000))
+    .catch(err => console.error("Error copying password", err));
 });
 
-
-
-
-// generate password function
 generate.addEventListener("click", (e) => {
   e.preventDefault();
 
-  const { lowercase, uppercase, numbers, special} = charactersObject
+  const { lowercase, uppercase, numbers, special } = charactersObject;
 
   const length = parseInt(lengthInput.value);
   const includeUppercase = document.getElementById("include-uppercase").checked;
@@ -122,7 +86,6 @@ generate.addEventListener("click", (e) => {
   const includeSymbols = document.getElementById("include-specials").checked;
 
   let characters = "";
-
   if (includeLowercase) characters += lowercase;
   if (includeUppercase) characters += uppercase;
   if (includeNumbers) characters += numbers;
@@ -130,24 +93,20 @@ generate.addEventListener("click", (e) => {
 
   let password = "";
   while (password.length < length) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    const randomChar = characters[randomIndex];
-
+    const randomChar = characters[Math.floor(Math.random() * characters.length)];
     password += randomChar;
   }
-  checkPasswordStrength()
+
+  checkPasswordStrength();
   result.innerText = password;
 });
 
-checboxesContainer.addEventListener("change",(e)=>{
-  if (e.target.matches('.checkbox-input')) {
-    checkPasswordStrength();
-  }
-})
-
+checkboxesContainer.addEventListener("change", (e) => {
+  if (e.target.matches('.checkbox-input')) checkPasswordStrength();
+});
 
 lengthInput.addEventListener("input", () => {
-  const length = parseInt(document.getElementById("length").value);
+  const length = parseInt(lengthInput.value);
   lengthPrev.innerText = length;
-  checkPasswordStrength()
+  checkPasswordStrength();
 });
