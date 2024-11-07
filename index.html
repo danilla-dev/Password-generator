@@ -10,6 +10,11 @@
 
 <body>
   <div id="app">
+    <header>
+      <h1>Password generator</h1>
+      <p>created by <a href="https://www.petroweb.pl">petroweb</a></p>
+
+    </header>
     <form>
       <fieldset class="fieldset length-fieldset">
         <legend class="legend password-length-legend">Password length:</legend>
@@ -32,6 +37,7 @@
         </div>
       </fieldset>
       <button id="generate-btn">Generate</button>
+      <p>password strength:</p>
       <div class="password-strength-bar-container">
         <div id="password-strength-bar" class="mid-strengt">
 
@@ -42,10 +48,11 @@
         <button id="result-copy-btn">
           <img src="./copy-icon.svg" alt="copy to clipboard icon" srcset="" class="copy-icon icon">
         </button>
-        </div>
+      </div>
     </form>
   </div>
   <div id="toast-container"></div>
   <script src="/main.js"></script>
 </body>
+
 </html>

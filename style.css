@@ -29,22 +29,63 @@
 	--error-bg: #ffebee;
 	--error-text: #c62828;
 
-		/* Password Strength Colors */
-		--low-strength-bg: #ffebee; /* Low strength color */
-		--mid-strength-bg: #fff3e0; /* Mid strength color */
-		--high-strength-bg: #e1f5fe; /* High strength color */
-		--perfect-strength-bg: #e8f5e9; /* Perfect strength color */
-	
-		--low-strength-text: #c62828; /* Text color for low strength */
-		--mid-strength-text: #ff9800; /* Text color for mid strength */
-		--high-strength-text: #1976d2; /* Text color for high strength */
-		--perfect-strength-text: #388e3c; /* Text color for perfect strength */
-}
+	/* Password Strength Colors */
+	--low-strength-bg: #ffebee; /* Low strength color */
+	--mid-strength-bg: #fff3e0; /* Mid strength color */
+	--high-strength-bg: #e1f5fe; /* High strength color */
+	--perfect-strength-bg: #e8f5e9; /* Perfect strength color */
 
+	--low-strength-text: #c62828; /* Text color for low strength */
+	--mid-strength-text: #ff9800; /* Text color for mid strength */
+	--high-strength-text: #1976d2; /* Text color for high strength */
+	--perfect-strength-text: #388e3c; /* Text color for perfect strength */
+}
+.dark {
+	/* Primary Colors */
+	--primary-bg: #1c1f24; /* Odpowiednik jasnego tła */
+	--primary-text: #e0e0e0; /* Jasny kolor tekstu */
+	--accent-color: #90caf9; /* Jaśniejszy niebieski dla akcentu */
+	--accent-hover: #64b5f6; /* Jaśniejszy kolor dla efektu hover */
+
+	/* Secondary Colors */
+	--secondary-bg: #2c2f33; /* Ciemniejsze tło dla elementów drugorzędnych */
+	--secondary-border: #3a3f44; /* Ciemniejszy kolor dla ramek */
+	--secondary-text: #b0b0b0; /* Lżejszy szary dla tekstu drugorzędnego */
+
+	/* Input & Control Colors */
+	--control-bg: #1e3a5f; /* Ciemniejszy kolor dla elementów kontrolnych */
+	--control-border: #90caf9; /* Jaśniejszy akcent dla ramek */
+	--control-text: #ffffff; /* Jasny kolor tekstu */
+	--control-hover: #42a5f5; /* Jaśniejszy efekt hover dla elementów kontrolnych */
+
+	/* Result Colors */
+	--result-bg: #2e3b27; /* Ciemniejsze tło dla wyników */
+	--result-text: #aed581; /* Jasny kolor tekstu wyników */
+
+	/* Error Colors */
+	--error-bg: #5c1c1e; /* Ciemniejsze tło dla błędów */
+	--error-text: #ef9a9a; /* Jasny czerwony dla tekstu błędów */
+
+	/* Password Strength Colors */
+	--low-strength-bg: #5c1c1e; /* Tło dla niskiej siły hasła */
+	--mid-strength-bg: #5d4037; /* Tło dla średniej siły hasła */
+	--high-strength-bg: #1a237e; /* Tło dla wysokiej siły hasła */
+	--perfect-strength-bg: #1b5e20; /* Tło dla maksymalnej siły hasła */
+
+	--low-strength-text: #ef9a9a; /* Kolor tekstu dla niskiej siły hasła */
+	--mid-strength-text: #ffb74d; /* Kolor tekstu dla średniej siły hasła */
+	--high-strength-text: #64b5f6; /* Kolor tekstu dla wysokiej siły hasła */
+	--perfect-strength-text: #81c784; /* Kolor tekstu dla maksymalnej siły hasła */
+}
 html {
 	font-size: 62.5%; /* 1rem = 10px */
 }
-
+.toast,
+#result-container,
+.password-strength-bar-container {
+	border-radius: 10px;
+	color: var(--result-text);
+}
 body {
 	background-color: var(--primary-bg);
 	color: var(--primary-text);
@@ -72,8 +113,32 @@ label {
 	color: var(--secondary-text);
 	font-size: 1.8rem;
 }
-input{
+input {
 	cursor: pointer;
+}
+
+header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 2em;
+}
+h1 {
+	color: var(--primary-text);
+	text-transform: uppercase;
+	font-size: 2rem;
+}
+p {
+	color: var(--secondary-text);
+	font-size: 1.6rem;
+	margin-top: 0.5em;
+	text-align: center;
+}
+a {
+	color: var(--accent-color);
+	text-decoration: none;
+	font-weight: bold;
 }
 
 .fieldset {
@@ -88,7 +153,6 @@ input{
 	display: block;
 	font-size: 1.6rem;
 }
-
 
 .length-value-preview {
 	font-weight: bold;
@@ -121,7 +185,7 @@ input{
 	background-color: var(--control-hover);
 }
 
-.checkboxes-container{
+.checkboxes-container {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
@@ -140,10 +204,12 @@ input{
 	color: var(--secondary-text);
 	cursor: pointer;
 }
-
+#generate-btn {
+	margin-bottom: 0.5em;
+}
 button {
 	background-color: var(--accent-color);
-	color: #fff;
+	color: var(--secondary-bg);
 	border: none;
 	padding: 0.75em 1.5em;
 	border-radius: 10px;
@@ -162,9 +228,7 @@ button:hover {
 	justify-content: space-between;
 	align-items: center;
 	background-color: var(--result-bg);
-	color: var(--result-text);
 	padding: 0.5em;
-	border-radius: 10px;
 	text-align: center;
 	font-weight: bold;
 	font-size: 1.8rem;
@@ -172,8 +236,8 @@ button:hover {
 #result {
 	display: inline-block;
 	max-width: 70%;
-	word-break: break-all; 
-	white-space: normal; 
+	word-break: break-all;
+	white-space: normal;
 }
 #result-container .copy-icon {
 	width: 2rem;
@@ -201,17 +265,15 @@ button:hover {
 	transform: translateX(-50%);
 	z-index: 1000;
 }
-  
+
 .toast {
 	opacity: 0;
 	padding: 1em 2em;
-	border-radius: 10px;
 	border: 0.1rem solid var(--result-text);
 	background-color: var(--result-bg);
-	color: var(--result-text);
 	font-size: 1.6rem;
 	transform: translateY(-2rem);
-	transition: opacity 0.4s ease, transform 0.4s ease;
+	transition: all 0.4s ease;
 }
 
 .toast.show {
@@ -221,26 +283,28 @@ button:hover {
 .password-strength-bar-container {
 	width: 100%;
 	height: 20px;
-	margin: 1.5em 0;
-	border-radius: 5px;
+	margin-bottom: 1.5em;
+	margin-top: 0.5em;
+	overflow: hidden;
 	border: 1px solid var(--secondary-text);
 }
-#password-strength-bar{
+#password-strength-bar {
 	height: 100%;
+	transition: all 0.3s ease;
 }
-.low{
+.low {
 	width: 25%;
 	background-color: var(--low-strength-text);
 }
-.mid{
+.mid {
 	width: 50%;
 	background-color: var(--mid-strength-text);
 }
-.high{
+.high {
 	width: 75%;
 	background-color: var(--high-strength-text);
 }
-.perfect{
+.perfect {
 	width: 100%;
 	background-color: var(--perfect-strength-text);
 }
