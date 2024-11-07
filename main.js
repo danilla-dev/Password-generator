@@ -1,8 +1,23 @@
 const generate = document.getElementById("generate-btn");
 const lengthInput = document.getElementById("length");
 const lengthPrev = document.getElementById("length-prev");
-
+const copyBtn = document.getElementById("result-copy-btn")
+const result = document.getElementById("result")
 lengthInput.value = 12;
+
+
+
+copyBtn.addEventListener("click", (e) => {
+  e.preventDefault()
+  const passwordText = result.innerText 
+  navigator.clipboard.writeText(passwordText).then(() => {
+    alert("Hasło skopiowane do schowka!");
+  }).catch(err => {
+    console.error("Błąd podczas kopiowania hasła: ", err);
+  });
+});
+
+
 
 generate.addEventListener("click", (e) => {
   e.preventDefault();
@@ -27,8 +42,7 @@ generate.addEventListener("click", (e) => {
     password += randomChar;
   }
 
-  document.getElementById("result").innerText =
-    "Wygenerowane hasło: " + password;
+  result.innerText = password;
 });
 
 lengthInput.addEventListener("input", () => {

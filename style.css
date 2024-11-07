@@ -28,6 +28,8 @@
 	/* Error Colors */
 	--error-bg: #ffebee; /* Tło dla błędów */
 	--error-text: #c62828; /* Kolor tekstu błędu */
+
+
 }
 
 *,
@@ -136,8 +138,10 @@ button:hover {
 	background-color: var(--accent-hover);
 }
 
-#result {
-	display: block;
+#result-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	margin-top: 20px;
 	background-color: var(--result-bg);
 	color: var(--result-text);
@@ -146,4 +150,24 @@ button:hover {
 	text-align: center;
 	font-weight: bold;
 	font-size: 1.1em;
+}
+#result {
+	display: inline-block;
+	max-width: 70%;
+	word-break: break-all; 
+    white-space: normal; 
+}
+#result-container .copy-icon{
+	width: 20px;
+	aspect-ratio: 1 /1;
+	color: var(--control-bg);
+}
+#result-copy-btn{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20%;
+	max-width: 50px;
+	padding: 0.5em 0.25em;
+	text-align: center;
 }
